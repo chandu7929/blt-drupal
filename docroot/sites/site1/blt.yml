@@ -1,0 +1,17 @@
+project:
+  local:
+    hostname: local.site1.com
+    protocol: http
+  machine_name: site1
+  human_name: site1
+drush:
+  aliases:
+    local: site1.local
+    remote: site1.dev
+drupal:
+  db:
+    database: site1
+    username: site1
+    password: site1
+    host: localhost
+    port: 3306

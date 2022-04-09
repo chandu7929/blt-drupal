@@ -1,0 +1,44 @@
+project:
+  prefix: BLT
+  machine_name: blt-drupal
+  human_name: 'BLT Drupal 9'
+  profile:
+    name: standard
+  local: {  }
+drupal:
+  account.name: admin
+  account.mail: no-reply@example.com
+  site.mail: '${drupal.account.mail}'
+cm:
+  # Possible values: core-only, config-split, none.
+  # strategy: config-split
+  allow-override: true
+git:
+  default_branch: develop
+  remotes:
+    # Update with your acquia cloud repo URL.
+    git@github.com: chandu7929/blt-drupal.git
+  hooks:
+    pre-commit: false
+  commit-msg:
+    pattern: '/(^${project.prefix}-[0-9]+(: )[^ ].{15,}\.)|(Merge branch (.)+)/'
+    help_description: 'The commit message should include your project prefix, followed by a hyphen and ticket number, followed by a colon and a space, fifteen characters or more describing the commit, and end with a period.'
+    example: '${project.prefix}-123: Update module configuration.'
+drush:
+  aliases:
+    local: self
+    ci: self
+  sanitize: true
+phpcbf:
+  filesets:
+    - files.php.custom.modules
+    - files.php.tests
+    - files.php.custom.themes
+    - files.frontend.custom.themes
+phpcs:
+  standard: 'Drupal,DrupalPractice'
+validate:
+  lint:
+    filesets: [files.php.custom.modules, files.php.custom.themes, files.php.tests]
+    twig: { filesets: [files.twig] }
+    yaml: { filesets: [files.yaml] }

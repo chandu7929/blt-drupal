@@ -1,0 +1,9 @@
+project:
+  local:
+    hostname: local.blt-drupal.com
+    protocol: http
+  machine_name: blt-drupal
+drush:
+  aliases:
+    local: self
+    remote: null
